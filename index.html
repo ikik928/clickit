@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just a Cool Site 😎</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // Simple funny prank game where a chaiwala gets slapped
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    document.body.appendChild(canvas);
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const chaiwala = {
+      x: canvas.width / 2 - 50,
+      y: canvas.height / 2 - 50,
+      width: 100,
+      height: 100,
+      img: new Image(),
+    };
+    chaiwala.img.src = 'https://i.imgur.com/Vz9F0vX.png'; // Funny chaiwala image (placeholder)
+
+    const slapSound = new Audio('https://www.soundjay.com/human/slap-01a.mp3');
+
+    function drawChaiwala() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(chaiwala.img, chaiwala.x, chaiwala.y, chaiwala.width, chaiwala.height);
+    }
+
+    canvas.addEventListener('click', (e) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      if (
+        mouseX >= chaiwala.x &&
+        mouseX <= chaiwala.x + chaiwala.width &&
+        mouseY >= chaiwala.y &&
+        mouseY <= chaiwala.y + chaiwala.height
+      ) {
+        slapSound.play();
+        alert('SLAPPED! 😂');
+      }
+    });
+
+    chaiwala.img.onload = drawChaiwala;
+  </script>
+</body>
+</html>
